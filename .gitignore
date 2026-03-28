@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+.pretrained/
+pretrained_models/
+data/*.json

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speaker Isolator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Speaker Isolator</h1>
+    <p class="subtitle">בידוד דובר בזמן אמת עם ECAPA-TDNN</p>
+
+    <!-- ── Enroll Section ──────────────────────────────────── -->
+    <section class="card" id="enroll-section">
+      <h2>1. רישום דובר</h2>
+      <div class="form-row">
+        <input type="text" id="speaker-id" placeholder="שם הדובר" />
+        <button id="btn-record" class="btn">🎤 הקלט</button>
+        <label class="btn btn-file">
+          📁 העלה WAV
+          <input type="file" id="enroll-file" accept="audio/*" hidden />
+        </label>
+      </div>
+      <div id="record-status" class="status"></div>
+      <div id="enroll-result" class="result"></div>
+    </section>
+
+    <!-- ── Speakers List ──────────────────────────────────── -->
+    <section class="card">
+      <h2>2. דוברים רשומים</h2>
+      <div class="form-row">
+        <button id="btn-refresh" class="btn">🔄 רענן</button>
+      </div>
+      <div id="speakers-list" class="result"></div>
+    </section>
+
+    <!-- ── Real-time Isolation ────────────────────────────── -->
+    <section class="card" id="stream-section">
+      <h2>3. בידוד בזמן אמת</h2>
+      <div class="form-row">
+        <select id="speaker-select">
+          <option value="">בחר דובר...</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>סף דמיון:
+          <input type="range" id="threshold" min="0" max="1" step="0.05" value="0.25" />
+          <span id="threshold-val">0.25</span>
+        </label>
+      </div>
+      <div class="form-row">
+        <button id="btn-stream" class="btn btn-primary">🎙 התחל הקלטה</button>
+      </div>
+      <div id="stream-status" class="status"></div>
+      <div id="stream-stats" class="stats" style="margin-top:0.5rem"></div>
+
+      <!-- Results — shown after stop -->
+      <div id="stream-results" class="results-area" hidden>
+        <div class="audio-compare">
+          <div class="audio-col">
+            <h4>🔊 הקלטה מקורית</h4>
+            <audio id="original-audio" controls></audio>
+          </div>
+          <div class="audio-col">
+            <h4>🗣 דובר מבודד</h4>
+            <audio id="isolated-audio" controls></audio>
+          </div>
+        </div>
+        <div class="form-row">
+          <a id="download-original" class="btn" download="original.wav">⬇ הורד מקור</a>
+          <a id="download-isolated" class="btn btn-primary" download="isolated.wav">⬇ הורד מבודד</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Docs link ──────────────────────────────────────── -->
+    <section class="card">
+      <h2>4. תיעוד API</h2>
+      <p><a href="/api/docs" class="btn btn-primary">📡 פתח תיעוד API ודוגמאות קוד</a></p>
+      <p style="margin-top:0.5rem; opacity:0.7">WebSocket endpoint, דוגמאות Python / JavaScript</p>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
